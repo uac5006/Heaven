@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style>
+	html,body,h1,h2,p,ul,li{
+		margin:0;
+		padding:0;
+		list-style: none;
+	}
+	ul{
+		margin: 20px;
+		border-top: 1px solid #ddd;
+		border-left:1px solid #ddd;
+		width:252px;
+		height:213px;
+	}
+
+	li{
+		width:62px;
+		height:70px;
+		border-right:1px solid #ddd;
+		border-bottom:1px solid #ddd;
+		float:left;	
+		text-align: center;	/*文字居中*/
+		font-size:13px;		/*字体大小*/
+	}
+	ul li h1{				/*这是后代选择器 选择的是 页面上所有UL里面的LI里面的H1*/
+		width: 25px;
+		height:25px;
+		background-image: url("a.png");
+		margin:10px auto;	/*h1元素居中 这句话的意思是设置上下margin为10像素，左右margin自适应*/
+	}
+	ul li:nth-child(1) h1{background-position: 0 0;}
+	ul li:nth-child(2) h1{background-position: 0 -25px;}
+	ul li:nth-child(3) h1{background-position: 0 -50px;}
+	ul li:nth-child(4) h1{background-position: 0 -75px;}
+	ul li:nth-child(5) h1{background-position: 0 -100px;}
+	ul li:nth-child(6) h1{background-position: 0 -125px;}
+	ul li:nth-child(7) h1{background-position: 0 -150px;}
+	ul li:nth-child(8) h1{background-position: 0 -175px;}
+	ul li:nth-child(9) h1{background-position: 0 -250px;}
+	ul li:nth-child(10) h1{background-position: 0 -200px;}
+	ul li:nth-child(11) h1{background-position: 0 -275px;}
+	ul li:nth-child(12) h1{background-position: 0 -225px;}
+</style>
+<body>
+	<ul>
+		<li><h1></h1>话费</li>
+		<li><h1></h1>机票</li>
+		<li><h1></h1>电影票</li>
+		<li><h1></h1>游戏</li>
+		<li><h1></h1>彩票</li>
+		<li><h1></h1>加油卡</li>
+		<li><h1></h1>酒店</li>
+		<li><h1></h1>火车票</li>
+		<li><h1></h1>众筹</li>
+		<li><h1></h1>理财</li>
+		<li><h1></h1>礼品卡</li>
+		<li><h1></h1>白条</li>
+	</ul>
+</body>
+</html>

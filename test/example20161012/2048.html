@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>2048</title>
+<meta charset="utf-8">
+<style>
+	body{
+	font-family:"microsoft yahei";
+	}
+	body > div{
+	width:480px;
+	height:480px;
+	position:absolute;
+	margin:0 auto;
+	background:#BBADA0;
+	border-radius:10px;
+	position: relative;
+	}
+
+	div > div{
+	float:left;
+	height:100px;
+	width:100px;
+	border-radius:6px;
+	line-height:98px;
+	font-size:30px;
+	text-align:center;
+	}
+	div > .grid{
+	background:#ccc0b3;
+	margin:16px 0 0 16px;
+	}
+	div > div[id]{
+	position:absolute;
+	}
+	div > div[id^="d0"]{top:16px;}
+	div > div[id^="d1"]{top:132px;}
+	div > div[id^="d2"]{top:248px;}
+	div > div[id^="d3"]{top:364px;} 
+
+	div > div[id$="0"]{left:16px;}
+	div > div[id$="1"]{left:132px;}
+	div > div[id$="2"]{left:248px;}
+	div > div[id$="3"]{left:364px;} 
+
+	.c0{color:transparent;}
+	.c2{background-color: #eee4da;}
+	.c4{background-color: #ede0c8;}
+	.c8{background-color: #f2b179;}
+	.c16{background-color: #f5963a;}
+	.c32{background-color: #f67c5f;}
+	.c64{background-color: #f65e3b;}
+	.c128{background-color:#edcf72;}
+	.c256{background-color: #edcc61;}
+	.c512{background-color:#9c0;}
+	.c1024{background-color:#33b5e5;}
+	.c2048{background-color: #09c;}
+	.c4096{background-color:#a6c;}
+	.c8192{background-color: #93c;}
+</style>
+</head>
+<body>
+	<div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+	<div class="grid"></div>
+
+	<div id="d00" class="c2">0</div>
+	<div id="d01">0</div>
+	<div id="d02">0</div>
+	<div id="d03">0</div>
+	<div id="d10">0</div>
+	<div id="d11">0</div>
+	<div id="d12">0</div>
+	<div id="d13">0</div>
+	<div id="d20">0</div>
+	<div id="d21">0</div>
+	<div id="d22">0</div>
+	<div id="d23">0</div>
+	<div id="d30">0</div>
+	<div id="d31">0</div>
+	<div id="d32">0</div>
+	<div id="d33">0</div>
+	</div>
+
+<script>
+var a=[[0,0,0,0],[0,0,0,0],[0,0,0,0],[0,0,0,0]];
+
+getRandom();
+
+printScreen();
+
+document.onkeydown=function(/*event*/){
+var event=window.event||arguments[0];
+console.log("step 1");
+var code=event.keyCode;
+
+if(code==37){
+moveLeft();
+}
+else if(code==39){
+moveRight();
+}
+else if(code==38){
+moveUp();
+}
+else if(code==40){
+moveDown();
+}
+else if(code=50){
+return 0;
+}
+getRandom();
+
+printScreen();
+if(isGameOver()==-1){alert("GAME OVER");}
+else if(isGameOver()==1){alert("YOU WIN");}
+}
+
+function printScreen(){
+for(var x=0;x<4;x++){
+for(var y=0;y<4;y++){
+document.querySelector("#d"+x+y).innerHTML=a[x][y];
+document.querySelector("#d"+x+y).setAttribute("class","c"+a[x][y]);
+}
+
+}
+}
+
+function getRandom(){
+var j,x,y,r,list=[],i=0;
+for(var x=0;x<4;x++){
+for(var y=0;y<4;y++){
+if(a[x][y]==0){i++;}
+}
+}
+
+if(i==1){
+for(var x=0;x<4;x++){
+for(var y=0;y<4;y++){
+if(a[x][y]==0){a[x][y]=parseInt(Math.random()*1+1)*2;return 0;}
+}
+}
+
+}
+else{
+list[0]=parseInt(Math.random()*i+1);
+//list[1]=parseInt(Math.random()*(i-1)+1);
+
+//console.log(list);
+for(i=0,j=0;j<list.length;i=0,j++){
+for(x=0;x<4;x++){
+for(y=0;y<4;y++){
+if(a[x][y]==0){
+i++;
+if(i==list[j]){
+console.log(x+","+y);
+a[x][y]=parseInt(Math.random()*2+1)*2;
+
+}
+
+}
+}
+}
+}
+}
+
+}
+
+function moveLeft(){
+var i,h;
+var j,flag=0;
+for(h=0;h<4;h++){
+for(i=0;i<4;i++){
+for(j=i+1;j<4;j++){
+if(a[h][j]!=0){
+break;
+}
+else if(j==3){
+flag=1;//此行后面都是0
+break;
+}
+}
+if(flag==1){
+flag=0;
+break;
+}
+if(i==3){
+break;
+}
+if(a[h][i]==0){
+a[h][i]=a[h][j];
+a[h][j]=0;
+i--;
+}
+else if(a[h][i]==a[h][j]){
+a[h][i]=a[h][i]*2;
+a[h][j]=0;
+}
+}
+}
+return 0;
+}
+function moveRight(){
+var i,h;
+var j,flag=0;
+for(h=0;h<4;h++){
+for(i=3;i>=0;i--){
+for(j=i-1;j>=0;j--){
+if(a[h][j]!=0){
+break;
+}
+else if(j==0){
+flag=1;//此行后面都是0
+break;
+}
+}
+if(flag==1){
+flag=0;
+break;
+}
+if(i==0){
+break;
+}
+if(a[h][i]==0){
+a[h][i]=a[h][j];
+a[h][j]=0;
+i++;
+}
+else if(a[h][i]==a[h][j]){
+a[h][i]=a[h][i]*2;
+a[h][j]=0;
+}
+}
+}
+return 0;
+}
+function moveUp(){
+var i,h;
+var j,flag=0;
+for(h=0;h<4;h++){
+for(i=0;i<4;i++){
+for(j=i+1;j<4;j++){
+if(a[j][h]!=0){
+break;
+}
+else if(j==3){
+flag=1;//此行后面都是0
+break;
+}
+}
+if(flag==1){
+flag=0;
+break;
+}
+if(i==3){
+break;
+}
+if(a[i][h]==0){
+a[i][h]=a[j][h];
+a[j][h]=0;
+i--;
+}
+else if(a[i][h]==a[j][h]){
+a[i][h]=a[i][h]*2;
+a[j][h]=0;
+}
+}
+}
+return 0;
+}
+function moveDown(){
+var i,h;
+var j,flag=0;
+for(h=0;h<4;h++){
+for(i=3;i>=0;i--){
+for(j=i-1;j>=0;j--){
+if(a[j][h]!=0){
+break;
+}
+else if(j==0){
+flag=1;//此行后面都是0
+break;
+}
+}
+if(flag==1){
+flag=0;
+break;
+}
+if(i==0){
+break;
+}
+if(a[i][h]==0){
+a[i][h]=a[j][h];
+a[j][h]=0;
+i++;
+}
+else if(a[i][h]==a[j][h]){
+a[i][h]=a[i][h]*2;
+a[j][h]=0;
+}
+}
+}
+return 0;
+}
+function isGameOver(){
+for(var x=0;x<4;x++){
+for(var y=0;y<4;y++){
+if(a[x][y]==0){return 0;}
+if(a[x][y]==2048){return 1;}
+if(y<3&&a[x][y]==a[x][y+1]){return 0;}
+if(x<3&&a[x][y]==a[x+1][y]){return 0;} 
+}
+}
+return -1; 
+}
+
+</script>
+</body>
+</html>

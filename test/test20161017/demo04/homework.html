@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo</title>
+	<style>
+		/*css重置*/
+		html,body,h1,h2,h3,h4,h5,h6,ol,ul,li,p,dl,dd,dt{
+			margin:0;
+			padding:0;
+			list-style: none;
+		}
+		
+		/*布局边框  测试用*/
+		div{
+			border:1px solid #000;
+			margin-bottom: 10px;
+		}
+
+
+		/*高度设置*/
+		#header{
+			height:150px;
+		}
+		#nav{
+			height:50px;
+		}
+		#article,#aside_left,#aside_right{
+			height:1200px;
+		}
+		#footer{
+			height:100px;
+		}
+
+
+		/*布局样式*/
+		#aside_left,#aside_right{
+			float:right;	/*右浮动*/
+			width:400px;
+		}
+		#aside_left{
+			float:left;		/*左边部分左浮动，覆盖之前的右浮动*/
+		}
+		#article{
+			margin-right:420px;
+			margin-left:420px;
+		}
+
+
+		#footer{
+			margin-bottom:0;
+		}
+	</style>
+</head>
+<body>
+	<div id="header">
+		header
+	</div>
+	<div id="nav">
+		nav
+	</div>
+	<!-- 注意顺序 -->
+	<div id="aside_left">
+		aside
+	</div>
+	<div id="aside_right">
+		aside
+	</div>
+	<div id="article">
+		article
+	</div>
+
+	<div id="footer">
+		footer
+	</div>
+</body>
+</html>
